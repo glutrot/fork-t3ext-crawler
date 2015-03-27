@@ -280,6 +280,12 @@ class tx_crawler_lib {
 
 			}
 
+			// TSFE has to be explicitely initialized to empty default class if
+			// not defined yet to avoid a PHP warning
+			if (!array_key_exists('TSFE', $GLOBALS)) {
+				$GLOBALS['TSFE'] = new stdClass();
+			}
+
 			$urlObj->extConf = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT'];
 			if (!$GLOBALS['TSFE']->sys_page) {
 				$GLOBALS['TSFE']->sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
